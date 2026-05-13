@@ -2,6 +2,7 @@ package org.example.domain;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
 
@@ -14,7 +15,7 @@ public class Cliente {
     @Column(name = "id_cliente")
     private Long id;
 
-    @NotBlank(message = "O nome é obrigatório.")
+    @NotNull(message = "O nome é obrigatório.")
     @Size(max = 60, message = "A descrição deve conter no máximo 60 caracteres.")
     @Column(nullable = false, length = 60)
     private String nome;
