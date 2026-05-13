@@ -10,20 +10,28 @@ public class ErroResposta {
     private LocalDateTime dataHora;
     private List<CampoErro> erros;
 
-    public ErroResposta(int status, String titulo, List<CampoErro> erros){
+    public ErroResposta(int status, String titulo, List<CampoErro> erros) {
         this.status = status;
         this.titulo = titulo;
         this.dataHora = LocalDateTime.now();
         this.erros = erros;
     }
 
-    public static class CampoErro{
+    public int getStatus() { return status; }
+    public String getTitulo() { return titulo; }
+    public LocalDateTime getDataHora() { return dataHora; }
+    public List<CampoErro> getErros() { return erros; }
+
+    public static class CampoErro {
         private String campo;
         private String mensagem;
 
-        public CampoErro(String campo, String mensagem){
+        public CampoErro(String campo, String mensagem) {
             this.campo = campo;
             this.mensagem = mensagem;
         }
+
+        public String getCampo() { return campo; }
+        public String getMensagem() { return mensagem; }
     }
 }

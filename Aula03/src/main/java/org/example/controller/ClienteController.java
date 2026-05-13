@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import org.example.exception.RecursoNaoEncontradoException;
+
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController{
@@ -25,10 +27,11 @@ public class ClienteController{
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id){
-        Optional<Cliente> cliente = repository.findById(id);
-        return cliente.map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
+        Cliente cliente = repository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException(
+                        "Cliente " + id + " não encontrado"));
+        return ResponseEntity.ok(cliente);
     }
 
     @PostMapping
