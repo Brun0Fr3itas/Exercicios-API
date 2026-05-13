@@ -12,7 +12,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErroResposta handleValidationErrors(MethodArgumentNotValidException ex) {
+    public ErroResposta handleValidationErrors(MethodArgumentNotValidException ex){
         List<ErroResposta.CampoErro> erros = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
@@ -24,7 +24,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler(RecursoNaoEncontradoException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErroResposta handleRecursoNaoEncontrado(RecursoNaoEncontradoException ex) {
+    public ErroResposta handleRecursoNaoEncontrado(RecursoNaoEncontradoException ex){
         return new ErroResposta(404, ex.getMessage(), List.of());
     }
 }

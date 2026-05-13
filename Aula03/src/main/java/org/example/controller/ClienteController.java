@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import jakarta.validation.Valid;
 import org.example.domain.Cliente;
 import org.example.repository.ClienteRepository;
 import org.springframework.http.HttpStatus;
@@ -41,7 +42,7 @@ public class ClienteController{
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente clienteAtualizado){
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody @Valid Cliente clienteAtualizado){
         if (!repository.existsById(id)){
             return ResponseEntity.notFound().build();
         }
