@@ -9,6 +9,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "cliente")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Cliente {
 
     @Id

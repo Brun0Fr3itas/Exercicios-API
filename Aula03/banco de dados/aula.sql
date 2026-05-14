@@ -6,4 +6,4 @@ CREATE TABLE cliente (
     data_nascimento DATE
 );
 
-TRUNCATE TABLE cliente RESTART IDENTITY;
+TRUNCATE TABLE cliente, cliente_vip RESTART IDENTITY;
