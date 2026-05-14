@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import java.util.List;
 
@@ -26,5 +27,12 @@ public class ControllerExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErroResposta handleRecursoNaoEncontrado(RecursoNaoEncontradoException ex){
         return new ErroResposta(404, ex.getMessage(), List.of());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErroResposta handleMessageNotReadable(HttpMessageNotReadableException ex){
+        String mensagem = ex.getCause() != null ? ex.getCause().getMessage() : "Requisição inválida.";
+        return new ErroResposta(400, mensagem, List.of());
     }
 }

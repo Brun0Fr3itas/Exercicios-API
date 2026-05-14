@@ -1,6 +1,7 @@
 package org.example.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -20,6 +21,7 @@ public class Cliente {
     @Column(nullable = false, length = 60)
     private String nome;
 
+    @NotNull(message = "O CPF é obrigatório.")
     @Column(length = 11, unique = true)
     private String cpf;
 
@@ -29,6 +31,11 @@ public class Cliente {
 
     @Column(nullable = false, name = "data_nascimento")
     private LocalDate dataNascimento;
+
+    @NotNull(message = "O documento do cliente é obrigatório.")
+    @Valid
+    @Embedded
+    private DocumentoCliente documentoCliente;
 
     public Cliente() {}
 
@@ -71,4 +78,8 @@ public class Cliente {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    public DocumentoCliente getDocumentoCliente() { return documentoCliente; }
+
+    public void setDocumentoCliente(DocumentoCliente documentoCliente) { this.documentoCliente = documentoCliente; }
 }
