@@ -29,6 +29,9 @@ public class Livro {
     @JsonBackReference
     private Editora editora;
 
+    @OneToMany(mappedBy = "livro")
+    private List<Avaliacao> avaliacoes;
+
     public Long getId() {
         return id;
     }
@@ -75,5 +78,13 @@ public class Livro {
 
     public void setEditora(Editora editora) {
         this.editora = editora;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
     }
 }
